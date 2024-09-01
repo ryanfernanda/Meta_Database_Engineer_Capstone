@@ -24,7 +24,7 @@ This project is designed to manage the operations of the Little Lemon fast-food 
 
 To view the Entity-Relationship Diagram, click here or see the image below.
 
-![Diagram](./Images/diagram.png)
+![Diagram](./Images/ERD.png)
 
 ## Installation and Setup
 
