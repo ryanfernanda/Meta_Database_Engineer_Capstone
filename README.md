@@ -1,6 +1,6 @@
 # Meta Database Engineer Capstone : Little Lemon Database
   - [Entity-Relationship Diagram](#entity-relationship-diagram)
-  - [Installation and Setup](#installation-and-setup)
+  - [Create a database that hold the data](#createadatabase)
   - [Stored Procedures](#stored-procedures)
     - [GetMaxQuantity()](#getmaxquantity)
     - [CheckBooking()](#checkbooking)
@@ -22,25 +22,13 @@ This project is designed to manage the operations of the Little Lemon fast-food 
 
 ## Entity-Relationship Diagram
 
-To view the Entity-Relationship Diagram, click here or see the image below.
-
 ![Diagram](./Images/ERD.png)
 
-## Installation and Setup
+## Create Database
 
 To set up the database, do the following:
 
-1. **Install MySQL**: Download and install MySQL on your machine if you haven't done so.
-
-2. **Download SQL File**: Obtain the [LittleLemonDB.sql](./LittleLemonDB.sql) file from this repository.
-
-3. **Import and Execute in MySQL Workbench**:
-    - Open MySQL Workbench.
-    - Navigate to `Server` > `Data Import`.
-    - Choose `Import from Self-Contained File` and load the `LittleLemonDB.sql` file.
-    - Click `Start Import` to both import and execute the SQL commands from the file.
-
-Your database should now be set up and populated with tables and stored procedures.
+![Diagram](.Images/Data Model.png)
 
 ## Stored Procedures
 
