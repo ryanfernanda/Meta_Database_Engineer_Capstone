@@ -1,4 +1,4 @@
-# Little Lemon Restaurant Management System
+# Little Lemon Database
 
   - [Entity-Relationship Diagram](#entity-relationship-diagram)
   - [Create Database](#create-database)
