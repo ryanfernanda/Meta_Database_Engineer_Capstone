@@ -1,7 +1,4 @@
-# Little Lemon Restaurant Management System
-
-- [Little Lemon Restaurant Management System](#little-lemon-restaurant-management-system)
-  - [Project Description](#project-description)
+# Meta Database Engineer Capstone : Little Lemon Database
   - [Entity-Relationship Diagram](#entity-relationship-diagram)
   - [Installation and Setup](#installation-and-setup)
   - [Stored Procedures](#stored-procedures)
