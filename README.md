@@ -1,49 +1,27 @@
 # Little Lemon Restaurant Management System
 
-- [Little Lemon Restaurant Management System](#little-lemon-restaurant-management-system)
-  - [Project Description](#project-description)
   - [Entity-Relationship Diagram](#entity-relationship-diagram)
-  - [Installation and Setup](#installation-and-setup)
+  - [Create Database](#create-database)
   - [Stored Procedures](#stored-procedures)
     - [GetMaxQuantity()](#getmaxquantity)
     - [CheckBooking()](#checkbooking)
     - [UpdateBooking()](#updatebooking)
     - [AddBooking()](#addbooking)
     - [CancelBooking()](#cancelbooking)
-    - [AddValidBooking()](#addvalidbooking)
-    - [CancelOrder()](#cancelorder)
   - [Data Analysis with Tableau](#data-analysis-with-tableau)
-    - [Customers sales](#customers-sales)
-    - [Profit chart](#profit-chart)
-    - [Sales Bubble Chart](#sales-bubble-chart)
-    - [Cuisine Sales and Profits](#cuisine-sales-and-profits)
-    - [Dashboard](#dashboard)
-
-## Project Description
-
-This project is designed to manage the operations of the Little Lemon fast-food restaurant and is a part of the **Meta Database Engineer Certificate** course on Coursera. The project uses MySQL for database modeling and Tableau for data analysis. The `Preparation` folder contains all the initial files used to start working on this project.
 
 ## Entity-Relationship Diagram
 
 To view the Entity-Relationship Diagram, click here or see the image below.
 
-![Diagram](./C1 - ERD.png)
+![Little Lemon Logo](https://github.com/ryanfernanda/Meta_Database_Engineer_Capstone/blob/main/C1%20-%20ERD.png)
 
-## Installation and Setup
+## Create Database
 
-To set up the database, do the following:
+To view the Database Model, click here or see the image below.
 
-1. **Install MySQL**: Download and install MySQL on your machine if you haven't done so.
+![Little Lemon Logo](https://github.com/ryanfernanda/Meta_Database_Engineer_Capstone/blob/main/Data%20Model.png)
 
-2. **Download SQL File**: Obtain the [LittleLemonDB.sql](./LittleLemonDB.sql) file from this repository.
-
-3. **Import and Execute in MySQL Workbench**:
-    - Open MySQL Workbench.
-    - Navigate to `Server` > `Data Import`.
-    - Choose `Import from Self-Contained File` and load the `LittleLemonDB.sql` file.
-    - Click `Start Import` to both import and execute the SQL commands from the file.
-
-Your database should now be set up and populated with tables and stored procedures.
 
 ## Stored Procedures
 
@@ -91,6 +69,7 @@ END;
 ```sql
 CALL CheckBooking('2022-11-12', 3);
 ```
+
 ### UpdateBooking()
 This stored procedure updates the booking details in the database. It takes the booking ID and new booking date as parameters, making sure the changes are reflected in the system.
 
@@ -156,76 +135,12 @@ END;
 ```sql
 CALL `LittleLemonDB`.`CancelBooking`(9);
 ```
-### AddValidBooking()
-The AddValidBooking stored procedure aims to securely add a new table booking record. It starts a transaction and attempts to insert a new booking record, checking the table's availability.
-
-```sql
-CREATE PROCEDURE `LittleLemonDB`.`AddValidBooking`(IN new_booking_date DATE, IN new_table_number INT, IN new_customer_id INT, IN new_staff_id INT)
-BEGIN
-    DECLARE table_status INT;
-    START TRANSACTION;
-
-    SELECT COUNT(*) INTO table_status
-    FROM `LittleLemonDB`.`Bookings`
-    WHERE `Date` = new_booking_date AND `TableNumber` = new_table_number;
-
-    IF (table_status > 0) THEN
-        ROLLBACK;
-        SELECT 'Booking could not be completed. Table is already booked on the specified date.' AS 'Status';
-    ELSE
-        INSERT INTO `LittleLemonDB`.`Bookings`(`Date`, `TableNumber`, `CustomerID`, `StaffID`)
-        VALUES(new_booking_date, new_table_number, new_customer_id, new_staff_id);
-
-        COMMIT;
-        SELECT 'Booking completed successfully.' AS 'Status';
-    END IF;
-END;
-```
-```sql
-CALL AddValidBooking('2022-10-10', 5, 1, 1);
-```
-
-
-### CancelOrder()
-The CancelOrder stored procedure cancels or removes a specific order by its Order ID. It executes a DELETE statement to remove the order record from the Orders table.
-
-```sql
-CREATE PROCEDURE CancelOrder(IN orderIDToDelete INT)
-BEGIN
-  DECLARE orderExistence INT;
-
-  SELECT COUNT(*) INTO orderExistence FROM `LittleLemonDB`.`Orders` WHERE OrderID = orderIDToDelete;
-
-  IF orderExistence > 0 THEN
-    DELETE FROM `LittleLemonDB`.`OrderDeliveryStatuses` WHERE OrderID = orderIDToDelete;
-
-    DELETE FROM `LittleLemonDB`.`Orders` WHERE OrderID = orderIDToDelete;
-
-    SELECT CONCAT('Order ', orderIDToDelete, ' is cancelled') AS 'Confirmation';
-  ELSE
-    SELECT CONCAT('Order ', orderIDToDelete, ' does not exist') AS 'Confirmation';
-  END IF;
-END;
-```
-```sql
-CALL CancelOrder(5);
-```
 
 ## Data Analysis with Tableau
-A Tableau workbook has been created, containing various charts and dashboards to facilitate data analysis. Download the workbook [here](./tableau.twb)
+A Tableau workbook has been created, containing various charts and dashboards to facilitate data analysis. 
 
-### Customers sales
-![Customers sales](./Images/tableau-task1.png)
-
-### Profit chart
-![Profit chart](./Images/tableau-task2.png)
-
-### Sales Bubble Chart
-![Sales Bubble Chart](./Images/tableau-task3.png)
-
-###  Cuisine Sales and Profits
-![ Cuisine Sales and Profits](./Images/tableau-task4.png)
-
-### Dashboard
-![dashboard](./Images/tableau-task5.png)
-
+![Little Lemon Logo](https://github.com/ryanfernanda/Meta_Database_Engineer_Capstone/blob/main/First%20Name%20%26%20Last%20Name%20.png)
+![Little Lemon Logo](https://github.com/ryanfernanda/Meta_Database_Engineer_Capstone/blob/main/Cuisine%20Sales%20%26%20Profits%20Chart.png)
+![Little Lemon Logo](https://github.com/ryanfernanda/Meta_Database_Engineer_Capstone/blob/main/Customers%20Sales%20Chart.png)
+![Little Lemon Logo](https://github.com/ryanfernanda/Meta_Database_Engineer_Capstone/blob/main/Sales%20Bubble%20Chart.png)
+![Little Lemon Logo](https://github.com/ryanfernanda/Meta_Database_Engineer_Capstone/blob/main/Little%20Lemon%20Tableau%20Dashboard.png)
